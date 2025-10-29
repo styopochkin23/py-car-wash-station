@@ -19,15 +19,15 @@ class CarWashStation:
         return round(price, 1)
     def wash_single_car(self, car):
         if self.clean_power > car.clean_mark:
-            clean_mark = self.clean_power
+            car.clean_mark = self.clean_power
     def serve_cars(self, cars_list):
         income = 0.0
         for car in cars_list:
             price = self.calculate_washing_price(car)
-            if price > income:
-                income += price
+            if price > 0:
                 self.wash_single_car(car)
-        return  round(income, 1)
+                income += price
+        return  income
     def rate_service(self, rate):
         total_score = self.average_rating * self.count_of_ratings
         total_score += rate
